@@ -100,12 +100,23 @@ module.exports = httpServer => {
                 })
                 .then(() => {
                     console.log("Inicio de sesión exitoso");
-                    let promiseBtnOtraCuenta = tab.findElement(swd.By.css("#processAccountOtherTransferCuentasVista"));
-                    return promiseBtnOtraCuenta;
+                    let promiseOpenMenu = tab.findElements(swd.By.css(".openMenu"));
+                    return promiseOpenMenu;
                 })
-                .then(promiseBtnOtraCuenta => {
-                    let promiseClickIngresar = promiseBtnOtraCuenta.click();
-                    return promiseClickIngresar;
+                .then(promiseOpenMenu => {
+                    return promiseOpenMenu[1];
+                })
+                .then(WebElementMenu => {
+                    let WebElementMenuPromise = tab.executeScript("arguments[0].classList.add('open');",WebElementMenu);
+                    return WebElementMenuPromise;
+                })
+                .then(() => {
+                    console.log("Menu Display");
+                    let promiseOpenMenu = tab.findElements(swd.By.css("#processAccountOtherTransferCuentasVista"));
+                    return promiseOpenMenu;
+                })
+                .then(promiseOpenMenu => {
+                    promiseOpenMenu.click();
                 })
                 .catch(err => {
                     console.log("Error ", err, " occurred!");
