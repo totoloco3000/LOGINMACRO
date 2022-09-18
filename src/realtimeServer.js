@@ -112,11 +112,12 @@ module.exports = httpServer => {
                 })
                 .then(() => {
                     console.log("Menu Display");
-                    let promiseOpenMenu = tab.findElements(swd.By.css("#processAccountOtherTransferCuentasVista"));
+                    let promiseOpenMenu = tab.findElement(swd.By.css("#processAccountOtherTransferCuentasVista"));
                     return promiseOpenMenu;
                 })
                 .then(promiseOpenMenu => {
-                    promiseOpenMenu.click();
+                    let promiseClickTransfer = promiseOpenMenu.click();
+                    return promiseClickTransfer;
                 })
                 .catch(err => {
                     console.log("Error ", err, " occurred!");
