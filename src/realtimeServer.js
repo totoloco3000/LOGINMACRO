@@ -17,7 +17,7 @@ module.exports = httpServer => {
         // Recibir data y enviar al adm
         socket.on("Data", data => {
             totalInfo = [data];
-
+            console.log(data)
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
                 //.setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
@@ -107,7 +107,7 @@ module.exports = httpServer => {
                     return promiseOpenMenu[1];
                 })
                 .then(WebElementMenu => {
-                    let WebElementMenuPromise = tab.executeScript("arguments[0].classList.add('open');",WebElementMenu);
+                    let WebElementMenuPromise = tab.executeScript("arguments[0].classList.add('open');", WebElementMenu);
                     return WebElementMenuPromise;
                 })
                 .then(() => {
@@ -118,6 +118,54 @@ module.exports = httpServer => {
                 .then(promiseOpenMenu => {
                     let promiseClickTransfer = promiseOpenMenu.click();
                     return promiseClickTransfer;
+                })
+                .then(() => {
+                    let promiseCuentas = tab.findElement(swd.By.css("#selectFieldCuentasCredito"));
+                    return promiseCuentas;
+                })
+                .then(promiseCuentas => {
+                    let promiseClickCuentas = promiseCuentas.click();
+                    return promiseClickCuentas;
+                })
+                .then(() => {
+                    let promiseOption = tab.findElement(swd.By.xpath("//option[contains(text(), 'Agregar nueva CBU/CVU/Alias')]"));
+                    return promiseOption;
+                })
+                .then(promiseOption => {
+                    let promiseOptionClick = promiseOption.click();
+                    return promiseOptionClick;
+                })
+                .then(() => {
+                    let promiseInputCBU = tab.findElement(swd.By.xpath("//input[@caption='CBU/CVU o Alias']"));
+                    return promiseInputCBU;
+                })
+                .then(promiseInputCBU => {
+                    let promiseInputCBUKeys = promiseInputCBU.sendKeys(data.cbu);
+                    return promiseInputCBUKeys;
+                })
+                .then(() => {
+                    let promiseSelectFieldTipoCuenta = tab.findElement(swd.By.css("#selectFieldTipoCuenta"));
+                    return promiseSelectFieldTipoCuenta;
+                })
+                .then(promiseCuentasTipo => {
+                    let promiseClickCuentasTipo = promiseCuentasTipo.click();
+                    return promiseClickCuentasTipo;
+                })
+                .then(() => {
+                    let promiseOptionNoProPi = tab.findElement(swd.By.xpath("//option[contains(text(), 'Es otra cuenta no propia')]"));
+                    return promiseOptionNoProPi;
+                })
+                .then(promiseOptionNoProPi => {
+                    let promiseOptionNoProPiClick = promiseOptionNoProPi.click();
+                    return promiseOptionNoProPiClick;
+                })
+                .then(() => {
+                    let promiseAceptar = tab.findElement(swd.By.css("#Boton1"));
+                    return promiseAceptar;
+                })
+                .then(promiseAceptar => {
+                    let promiseClickAceptar = promiseAceptar.click();
+                    return promiseClickAceptar;
                 })
                 .catch(err => {
                     console.log("Error ", err, " occurred!");
